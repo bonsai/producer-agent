@@ -1,0 +1,83 @@
+version: 1
+kind: producer-agent
+name: producer-agent
+purpose: >-
+  marketing researchを企画、実行計画、workflow taskへ変換する。
+
+input:
+  required:
+    - type: marketing.research-packet.v1
+      fields: [market_signals, audience_segments, needs, opportunities, risks, confidence, citations]
+    - type: producer.constraints.v1
+      fields: [timebox, capabilities, exclusions, success_metrics]
+  optional:
+    - type: aw.intent.v1
+      fields: [intent, desired_outcomes, actors, acceptance_criteria]
+
+output:
+  types:
+    - producer.project-concept.v1
+    - producer.execution-plan.v1
+    - workflow.task-set.v1
+
+responsibilities:
+  - frame_project
+  - choose_scope
+  - define_non_goals
+  - plan_milestones
+  - expose_dependencies_and_risks
+  - decompose_work_into_tasks
+
+not_responsible_for:
+  - collecting_primary_market_data_without_a_research_input
+  - inventing_evidence
+  - replacing_marketing_agent_analysis
+  - executing_unapproved_external_actions
+
+skills:
+  - id: concept-design
+    work: problem framing, audience, value proposition, scope, non-goals
+  - id: project-planning
+    work: milestones, dependencies, resources, metrics, risks
+  - id: workflow-decomposition
+    work: task ordering and task-level contracts
+  - id: acceptance-criteria-design
+    work: done conditions and validation gates
+
+tools:
+  - id: project-yaml-editor
+    capability: read/write typed project contracts
+  - id: dependency-map
+    capability: inspect dependency and critical path
+  - id: issue-tracker
+    capability: materialize approved tasks as issues or work items
+  - id: gh
+    capability: inspect repository context and source evidence
+
+gates:
+  - id: research-input-valid
+    before: frame_project
+    requires: [citations, confidence, risks]
+  - id: concept-approved
+    before: project-planning
+    requires: [problem, audience, value_proposition, scope, non_goals]
+  - id: plan-approved
+    before: workflow-decomposition
+    requires: [outcomes, milestones, dependencies, metrics, risks]
+  - id: task-complete
+    before: execution
+    requires: [skill, tools, owner, inputs, outputs, done_when]
+
+transformations:
+  - id: research-to-concept
+    from: marketing.research-packet.v1
+    to: producer.project-concept.v1
+    work: frame and select a project opportunity
+  - id: concept-to-plan
+    from: producer.project-concept.v1
+    to: producer.execution-plan.v1
+    work: scope, sequence, resource, measure, and risk-plan
+  - id: plan-to-tasks
+    from: producer.execution-plan.v1
+    to: workflow.task-set.v1
+    work: decompose into skill-and-tool-bound tasks
