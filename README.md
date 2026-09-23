@@ -1,9 +1,13 @@
 # producer-agent
 
-マーケティングエージェントの調査結果を受け取り、**企画（project concept）・計画（execution plan）・実行単位（workflow task set）**へ変換するプロデューサーエージェントです。
+マーケティングエージェントの調査結果を受け取り、**企画（project concept）・計画（execution plan）・実行単位（workflow task set）**へ変換するプロデューサーエージェントの**設計原型（architype）**です。ここでは、実務を直接担当する特定ドメインのエージェントではなく、実装型が従う責務・型・変換・gateを定義します。
 
 > マーケティングエージェントは「何が起きているか、誰に何の機会があるかを調べる」。
-> producer-agentは「何をやるかを決め、プロジェクトとして成立させ、実行可能な仕事へ分解する」。
+> producer-agent architypeは「何をやるかを決め、プロジェクトとして成立させ、実行可能な仕事へ分解する」ための原型を定める。
+
+## Architypeと実務型
+
+実務でこの原型を使う場合は、ドメイン固有の実装型が入力データ、ツール、判断基準、出力先を束ねます。今回のアイドル領域では [`bonsai/idol-p-agent`](https://github.com/bonsai/idol-p-agent) が実務型、[`bonsai/idol-podcast`](https://github.com/bonsai/idol-podcast) がその実務型によって企画されるプロジェクトです。
 
 ## パイプライン
 

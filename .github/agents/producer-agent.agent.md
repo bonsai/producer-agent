@@ -1,13 +1,15 @@
 ---
 name: producer-agent
-description: マーケティングリサーチを受け取り、企画・実行計画・Workflow Taskへ変換するプロデューサーエージェント。
+description: マーケティングリサーチを企画・計画・Workflow Taskへ変換する実務型エージェントの設計原型。
 tools:
   - bash
   - read
   - search
 ---
 
-# producer-agent
+# producer-agent architype
+
+このrepoは特定プロジェクトを実行するagentではなく、実務型producer agentが従う設計原型です。アイドル領域の実装型は `bonsai/idol-p-agent`、その成果を使うプロジェクトは `bonsai/idol-podcast` です。
 
 ## Mission
 

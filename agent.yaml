@@ -1,8 +1,14 @@
 version: 1
-kind: producer-agent
+kind: producer-agent-architype
 name: producer-agent
 purpose: >-
-  marketing researchを企画、実行計画、workflow taskへ変換する。
+  marketing researchを企画、実行計画、workflow taskへ変換する
+  実務型エージェントの設計原型。
+
+role:
+  abstraction: architype
+  practical_type_example: bonsai/idol-p-agent
+  project_example: bonsai/idol-podcast
 
 input:
   required:
@@ -27,6 +33,14 @@ responsibilities:
   - plan_milestones
   - expose_dependencies_and_risks
   - decompose_work_into_tasks
+
+implementation_rule:
+  practical_type_must_declare:
+    - domain_inputs
+    - domain_tools
+    - project_outputs
+    - workflow_bindings
+    - acceptance_criteria
 
 not_responsible_for:
   - collecting_primary_market_data_without_a_research_input
